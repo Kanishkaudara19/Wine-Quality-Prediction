@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Wine Quality Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-wine-glass-alt"></i> Wine Quality Prediction</h1>
+            <p>Enter the wine's chemical properties below to predict its quality score on a scale of 1-10</p>
+        </div>
+        
+        <form method="POST" class="prediction-form">
+            <div class="form-grid">
+                {% for feature in feature_names %}
+                <div class="input-group">
+                    <label for="{{ feature.replace(' ', '_') }}">{{ feature.title().replace('_', ' ') }}</label>
+                    <input 
+                        type="number" 
+                        id="{{ feature.replace(' ', '_') }}" 
+                        name="{{ feature.replace(' ', '_') }}" 
+                        step="0.001" 
+                        placeholder="Enter value"
+                        value="{{ request.form[feature.replace(' ', '_')] if request.form else '' }}"
+                        required
+                    >
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="submit-button">
+                <button type="submit"><i class="fas fa-flask"></i> Predict Quality</button>
+            </div>
+        </form>
+        
+        {% if prediction is not none %}
+        <div class="results-container">
+            <div class="main-result">
+                <h2><i class="fas fa-chart-line"></i> Predicted Wine Quality</h2>
+                <div class="prediction-score">{{ prediction }}</div>
+                <div class="quality-label">
+                    {% if prediction < 4 %}
+                    <i class="fas fa-thumbs-down"></i> Poor Quality
+                    {% elif prediction < 6 %}
+                    <i class="fas fa-meh"></i> Average Quality
+                    {% elif prediction < 8 %}
+                    <i class="fas fa-thumbs-up"></i> Good Quality
+                    {% else %}
+                    <i class="fas fa-award"></i> Excellent Quality
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if all_predictions %}
+            <div class="model-comparison">
+                <h3><i class="fas fa-robot"></i> Model Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model Algorithm</th>
+                            <th>Predicted Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for model_name, pred in all_predictions.items() %}
+                        <tr>
+                            <td><strong>{{ model_name }}</strong></td>
+                            <td>{{ pred }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="placeholder-info">
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+                <p>Our model analyzes chemical properties like acidity, alcohol content, and sulfur dioxide levels to predict wine quality.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-lightbulb"></i> Pro Tips</h3>
+                <p>Higher alcohol content and lower volatile acidity often correlate with better quality wines.</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <footer class="footer">
+            <p>Powered by Machine Learning | <i class="fas fa-code"></i> Advanced Wine Quality Analysis</p>
+        </footer>
+    </div>
+</body>
+</html>

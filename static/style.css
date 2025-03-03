@@ -1,0 +1,443 @@
+/* Advanced Wine Quality Prediction Styles */
+:root {
+    --primary: #8b0000;  /* Dark wine red */
+    --primary-light: #b22222;  /* Firebrick red */
+    --secondary: #f5f5dc;  /* Beige */
+    --accent: #ffd700;  /* Gold */
+    --dark: #2c2c2c;
+    --light: #f8f8f8;
+    --shadow: rgba(0, 0, 0, 0.15);
+  }
+  
+  body {
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--dark);
+  }
+  
+  .container {
+    background: var(--light);
+    border-radius: 16px;
+    box-shadow: 
+      0 10px 30px var(--shadow),
+      0 1px 3px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 1000px;
+    padding: 35px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  
+  .header h1 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .header h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary);
+    margin: 15px auto;
+  }
+  
+  .header p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 300;
+  }
+  
+  /* Form Styles */
+  .prediction-form {
+    margin-bottom: 35px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+  }
+  
+  .input-group label {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  
+  .input-group input {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .input-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.15);
+  }
+  
+  .input-group:hover label {
+    color: var(--primary);
+  }
+  
+  .submit-button {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  button {
+    padding: 14px 32px;
+    background: linear-gradient(145deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+    text-transform: uppercase;
+  }
+  
+  button:hover {
+    box-shadow: 0 6px 15px rgba(139, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+  }
+  
+  /* Results Styles */
+  .results-container {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: var(--secondary);
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+  }
+  
+  .main-result {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .main-result h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 24px;
+  }
+  
+  .prediction-score {
+    font-size: 62px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .prediction-score::after {
+    content: "/10";
+    font-size: 24px;
+    position: absolute;
+    top: 12px;
+    right: -40px;
+    color: #888;
+  }
+  
+  .quality-label {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+  
+  /* Different label colors based on quality */
+  .results-container:has(.quality-label:contains("Poor")) .quality-label {
+    background-color: #ffcdd2;
+    color: #c62828;
+  }
+  
+  .results-container:has(.quality-label:contains("Average")) .quality-label {
+    background-color: #fff9c4;
+    color: #f57f17;
+  }
+  
+  .results-container:has(.quality-label:contains("Good")) .quality-label {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+  }
+  
+  .results-container:has(.quality-label:contains("Excellent")) .quality-label {
+    background-color: #bbdefb;
+    color: #1565c0;
+  }
+  
+  /* Model Comparison Table */
+  .model-comparison {
+    margin-top: 30px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .model-comparison h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    display: inline-block;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  table th, table td {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: rgba(245, 245, 220, 0.5);
+  }
+  
+  table tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  table tr:hover {
+    background-color: rgba(139, 0, 0, 0.05);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .results-container {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 25px;
+    }
+    
+    .form-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 20px;
+      margin: 10px;
+    }
+    
+    .prediction-score {
+      font-size: 50px;
+    }
+    
+    .header h1 {
+      font-size: 26px;
+    }
+    
+    button {
+      width: 100%;
+    }
+  }
+
+  
+/* Info Cards for when no prediction is shown */
+.placeholder-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  
+  .info-card {
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .info-card h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .info-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  /* Footer styles */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  /* Enhanced form styling */
+  .input-group input {
+    background-color: white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .input-group input:focus {
+    transform: translateY(-2px);
+  }
+  
+  /* Add subtle animations for form groups */
+  .input-group {
+    transition: transform 0.2s ease;
+  }
+  
+  .input-group:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Enhance quality label with badge styles */
+  .quality-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Improved table styling */
+  table th:first-child {
+    border-top-left-radius: 8px;
+  }
+  
+  table th:last-child {
+    border-top-right-radius: 8px;
+  }
+  
+  table td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Make the form more engaging with subtle animations */
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(139, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0); }
+  }
+  
+  button:hover {
+    animation: pulse 1.5s infinite;
+  }
+  
+  /* Responsive improvements for smaller screens */
+  @media (max-width: 600px) {
+    .placeholder-info {
+      grid-template-columns: 1fr;
+    }
+    
+    .quality-label {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+    
+    .header h1 {
+      font-size: 24px;
+    }
+  }
