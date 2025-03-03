@@ -1,2 +1,4 @@
-# Wine-Quality-Prediction
-This repository contains my solution for the #chydv Hackathon 2025, hosted by the Technical University of Denmark (DTU). The goal of this competition is to develop a regression model that accurately predicts wine quality based on various physicochemical properties of the wine.
+1. Get a clone of the Wine-Quality-Prediction repository to a preferred location on your PC.(using SSH key)
+2. Open IDE and open the project.
+3. Open a new terminal and type app.py and press enter.
+4. You can then run the app by copying the resulting URL and pasting it into your browser.
